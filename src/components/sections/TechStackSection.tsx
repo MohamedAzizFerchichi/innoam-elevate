@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TechIcon } from "@/components/ui/tech-icon";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const technologies = [
   { name: "React", icon: "⚛️" },
@@ -18,13 +19,15 @@ const technologies = [
 ];
 
 export function TechStackSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-24 lg:py-32 relative bg-secondary/30">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Technology Stack"
-          title="Built with modern technologies"
-          description="We use the latest tools and frameworks to build scalable, performant, and maintainable solutions."
+          badge={t("tech.badge")}
+          title={t("tech.title")}
+          description={t("tech.description")}
         />
 
         <motion.div

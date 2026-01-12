@@ -3,19 +3,22 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
-];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/", labelKey: "nav.home" },
+    { href: "/about", labelKey: "nav.about" },
+    { href: "/services", labelKey: "nav.services" },
+    { href: "/contact", labelKey: "nav.contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,7 +77,7 @@ export function Navbar() {
                         : "text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                     {location.pathname === link.href && (
                       <motion.div
                         layoutId="activeNav"
@@ -87,24 +90,28 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button + Language Switcher */}
             <div className="hidden lg:flex items-center gap-3">
+              <LanguageSwitcher />
               <Link to="/contact">
                 <Button variant="hero" size="lg">
-                  Request a Quote
+                  {t("nav.requestQuote")}
                 </Button>
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden relative z-10 p-2 text-foreground"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </motion.button>
+            <div className="lg:hidden flex items-center gap-3">
+              <LanguageSwitcher />
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="relative z-10 p-2 text-foreground"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.button>
+            </div>
           </nav>
         </div>
       </motion.header>
@@ -137,7 +144,7 @@ export function Navbar() {
                         : "text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 </motion.div>
               ))}
@@ -148,7 +155,7 @@ export function Navbar() {
               >
                 <Link to="/contact">
                   <Button variant="hero" size="xl">
-                    Request a Quote
+                    {t("nav.requestQuote")}
                   </Button>
                 </Link>
               </motion.div>

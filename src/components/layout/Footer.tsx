@@ -1,23 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from "lucide-react";
-
-const footerLinks = {
-  company: [
-    { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Contact", href: "/contact" },
-  ],
-  services: [
-    { label: "Web Development", href: "/services" },
-    { label: "Mobile Development", href: "/services" },
-    { label: "AI & Machine Learning", href: "/services" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-  ],
-};
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const socialLinks = [
   { icon: Twitter, href: "#", label: "Twitter" },
@@ -26,6 +10,25 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks = {
+    company: [
+      { labelKey: "nav.about", href: "/about" },
+      { labelKey: "nav.services", href: "/services" },
+      { labelKey: "nav.contact", href: "/contact" },
+    ],
+    services: [
+      { labelKey: "services.webDev", href: "/services" },
+      { labelKey: "services.mobileDev", href: "/services" },
+      { labelKey: "services.ai", href: "/services" },
+    ],
+    legal: [
+      { labelKey: "footer.privacyPolicy", href: "#" },
+      { labelKey: "footer.terms", href: "#" },
+    ],
+  };
+
   return (
     <footer className="relative border-t border-border/50 bg-background">
       <div className="absolute inset-0 grid-pattern opacity-30" />
@@ -48,7 +51,7 @@ export function Footer() {
               </motion.div>
             </Link>
             <p className="mt-4 text-muted-foreground max-w-sm leading-relaxed">
-              We craft digital solutions with precision and innovation. Building the future of technology, one project at a time.
+              {t("footer.description")}
             </p>
             <div className="flex items-center gap-4 mt-6">
               {socialLinks.map((social) => (
@@ -68,15 +71,15 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Company</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t("footer.company")}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <Link
                     to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                     <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
@@ -85,15 +88,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Services</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t("footer.services")}</h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <Link
                     to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                     <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
@@ -102,7 +105,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Contact</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t("footer.contact")}</h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -114,12 +117,12 @@ export function Footer() {
                 </a>
               </li>
               {footerLinks.legal.map((link) => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <a
                     href={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </a>
                 </li>
               ))}
@@ -130,10 +133,10 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-16 pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} InnoAM. All rights reserved.
+            © {new Date().getFullYear()} InnoAM. {t("footer.rights")}
           </p>
           <p className="text-sm text-muted-foreground">
-            Crafted with precision and innovation
+            {t("footer.crafted")}
           </p>
         </div>
       </div>
