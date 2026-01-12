@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -37,24 +38,6 @@ const contactSchema = z.object({
 
 type ContactForm = z.infer<typeof contactSchema>;
 
-const projectTypes = [
-  "Web Development",
-  "Mobile Development",
-  "Full-Stack & SaaS",
-  "AI & Machine Learning",
-  "Data Analytics & BI",
-  "Technical Consulting",
-  "Other",
-];
-
-const budgetRanges = [
-  "Under $10,000",
-  "$10,000 - $25,000",
-  "$25,000 - $50,000",
-  "$50,000 - $100,000",
-  "$100,000+",
-];
-
 const socialLinks = [
   { icon: Twitter, href: "#", label: "Twitter" },
   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -63,10 +46,25 @@ const socialLinks = [
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState<Partial<ContactForm>>({});
   const [errors, setErrors] = useState<Partial<Record<keyof ContactForm, string>>>({});
+
+  const projectTypes = [
+    t("services.webDev"),
+    t("services.mobileDev"),
+    t("services.fullStack"),
+    t("services.ai"),
+    t("services.dataAnalytics"),
+    t("services.consulting"),
+    t("contact.other"),
+  ];
+
+  const budgetRanges = language === "fr" 
+    ? ["Moins de 10 000 TND", "10 000 - 25 000 TND", "25 000 - 50 000 TND", "50 000 - 100 000 TND", "100 000+ TND"]
+    : ["Under $10,000", "$10,000 - $25,000", "$25,000 - $50,000", "$50,000 - $100,000", "$100,000+"];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,8 +90,8 @@ const Contact = () => {
     setIsSubmitting(false);
     setIsSuccess(true);
     toast({
-      title: "Message sent!",
-      description: "We'll get back to you within 24 hours.",
+      title: language === "fr" ? "Message envoyé!" : "Message sent!",
+      description: language === "fr" ? "Nous vous répondrons dans les 24 heures." : "We'll get back to you within 24 hours.",
     });
   };
 
@@ -122,7 +120,7 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-6"
           >
-            Get in Touch
+            {t("contact.badge")}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -130,7 +128,7 @@ const Contact = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight max-w-3xl mx-auto"
           >
-            Let's <span className="text-gradient">start a conversation</span>
+            {t("contact.title")} <span className="text-gradient">{t("contact.titleHighlight")}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -138,8 +136,7 @@ const Contact = () => {
             transition={{ delay: 0.2 }}
             className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto"
           >
-            Ready to transform your ideas into reality? We'd love to hear about
-            your project.
+            {t("contact.subtitle")}
           </motion.p>
         </div>
       </section>
@@ -158,7 +155,7 @@ const Contact = () => {
             >
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-6">
-                  Contact Information
+                  {t("contact.infoTitle")}
                 </h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
@@ -166,7 +163,7 @@ const Contact = () => {
                       <Mail className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-foreground">Email</h3>
+                      <h3 className="font-medium text-foreground">{t("contact.email")}</h3>
                       <a
                         href="mailto:hello@innoam.com"
                         className="text-muted-foreground hover:text-primary transition-colors"
@@ -180,12 +177,12 @@ const Contact = () => {
                       <Phone className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-foreground">Phone</h3>
+                      <h3 className="font-medium text-foreground">{t("contact.phone")}</h3>
                       <a
-                        href="tel:+1234567890"
+                        href="tel:+21612345678"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        +1 (234) 567-890
+                        +216 12 345 678
                       </a>
                     </div>
                   </div>
@@ -194,11 +191,9 @@ const Contact = () => {
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-foreground">Location</h3>
+                      <h3 className="font-medium text-foreground">{t("contact.location")}</h3>
                       <p className="text-muted-foreground">
-                        San Francisco, CA
-                        <br />
-                        United States
+                        Tunis, Tunisie
                       </p>
                     </div>
                   </div>
@@ -207,7 +202,7 @@ const Contact = () => {
 
               {/* Social Links */}
               <div>
-                <h3 className="font-medium text-foreground mb-4">Follow Us</h3>
+                <h3 className="font-medium text-foreground mb-4">{t("contact.followUs")}</h3>
                 <div className="flex items-center gap-3">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -250,10 +245,10 @@ const Contact = () => {
                         <CheckCircle className="w-10 h-10 text-primary-foreground" />
                       </motion.div>
                       <h3 className="text-2xl font-bold text-foreground mb-2">
-                        Message Sent!
+                        {t("contact.messageSent")}
                       </h3>
                       <p className="text-muted-foreground mb-8">
-                        Thank you for reaching out. We'll get back to you within 24 hours.
+                        {t("contact.messageSuccess")}
                       </p>
                       <Button
                         variant="outline"
@@ -262,7 +257,7 @@ const Contact = () => {
                           setFormData({});
                         }}
                       >
-                        Send Another Message
+                        {t("contact.sendAnother")}
                       </Button>
                     </motion.div>
                   ) : (
@@ -274,10 +269,10 @@ const Contact = () => {
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <Label htmlFor="name">Name *</Label>
+                          <Label htmlFor="name">{t("contact.formName")} *</Label>
                           <Input
                             id="name"
-                            placeholder="John Doe"
+                            placeholder={language === "fr" ? "Jean Dupont" : "John Doe"}
                             value={formData.name || ""}
                             onChange={(e) => handleChange("name", e.target.value)}
                             className={errors.name ? "border-destructive" : ""}
@@ -287,10 +282,10 @@ const Contact = () => {
                           )}
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="company">Company</Label>
+                          <Label htmlFor="company">{t("contact.formCompany")}</Label>
                           <Input
                             id="company"
-                            placeholder="Acme Inc."
+                            placeholder={language === "fr" ? "Acme SARL" : "Acme Inc."}
                             value={formData.company || ""}
                             onChange={(e) => handleChange("company", e.target.value)}
                           />
@@ -299,11 +294,11 @@ const Contact = () => {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <Label htmlFor="email">Email *</Label>
+                          <Label htmlFor="email">{t("contact.formEmail")} *</Label>
                           <Input
                             id="email"
                             type="email"
-                            placeholder="john@example.com"
+                            placeholder="jean@example.com"
                             value={formData.email || ""}
                             onChange={(e) => handleChange("email", e.target.value)}
                             className={errors.email ? "border-destructive" : ""}
@@ -313,10 +308,10 @@ const Contact = () => {
                           )}
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="phone">Phone (Optional)</Label>
+                          <Label htmlFor="phone">{t("contact.formPhone")}</Label>
                           <Input
                             id="phone"
-                            placeholder="+1 (234) 567-890"
+                            placeholder="+216 12 345 678"
                             value={formData.phone || ""}
                             onChange={(e) => handleChange("phone", e.target.value)}
                           />
@@ -325,13 +320,13 @@ const Contact = () => {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <Label>Project Type *</Label>
+                          <Label>{t("contact.formProjectType")} *</Label>
                           <Select
                             value={formData.projectType}
                             onValueChange={(value) => handleChange("projectType", value)}
                           >
                             <SelectTrigger className={errors.projectType ? "border-destructive" : ""}>
-                              <SelectValue placeholder="Select a type" />
+                              <SelectValue placeholder={t("contact.formSelectType")} />
                             </SelectTrigger>
                             <SelectContent>
                               {projectTypes.map((type) => (
@@ -346,13 +341,13 @@ const Contact = () => {
                           )}
                         </div>
                         <div className="space-y-2">
-                          <Label>Budget Range (Optional)</Label>
+                          <Label>{t("contact.formBudget")}</Label>
                           <Select
                             value={formData.budget}
                             onValueChange={(value) => handleChange("budget", value)}
                           >
                             <SelectTrigger>
-                              <SelectValue placeholder="Select a range" />
+                              <SelectValue placeholder={t("contact.formSelectRange")} />
                             </SelectTrigger>
                             <SelectContent>
                               {budgetRanges.map((range) => (
@@ -366,10 +361,10 @@ const Contact = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message">Message *</Label>
+                        <Label htmlFor="message">{t("contact.formMessage")} *</Label>
                         <Textarea
                           id="message"
-                          placeholder="Tell us about your project..."
+                          placeholder={t("contact.formMessagePlaceholder")}
                           rows={5}
                           value={formData.message || ""}
                           onChange={(e) => handleChange("message", e.target.value)}
@@ -395,7 +390,7 @@ const Contact = () => {
                           />
                         ) : (
                           <>
-                            Send Message
+                            {t("contact.sendMessage")}
                             <Send size={16} />
                           </>
                         )}
