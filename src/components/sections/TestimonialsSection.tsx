@@ -1,39 +1,45 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-
-const testimonials = [
-  {
-    quote:
-      "InnoAM transformed our vision into a stunning reality. Their technical expertise and attention to detail exceeded our expectations.",
-    author: "Sarah Chen",
-    role: "CEO, TechStart Inc.",
-    avatar: "SC",
-  },
-  {
-    quote:
-      "The team's ability to understand complex requirements and deliver scalable solutions is remarkable. Highly recommended!",
-    author: "Michael Roberts",
-    role: "CTO, FinanceFlow",
-    avatar: "MR",
-  },
-  {
-    quote:
-      "Working with InnoAM was a game-changer. They delivered on time, within budget, and with exceptional quality.",
-    author: "Emily Watson",
-    role: "Product Director, DataVerse",
-    avatar: "EW",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function TestimonialsSection() {
+  const { t, language } = useLanguage();
+
+  const testimonials = [
+    {
+      quote: language === "fr"
+        ? "InnoAM a transformé notre vision en une réalité impressionnante. Leur expertise technique et attention aux détails ont dépassé nos attentes."
+        : "InnoAM transformed our vision into a stunning reality. Their technical expertise and attention to detail exceeded our expectations.",
+      author: "Sarah Chen",
+      role: "CEO, TechStart Inc.",
+      avatar: "SC",
+    },
+    {
+      quote: language === "fr"
+        ? "La capacité de l'équipe à comprendre des exigences complexes et à fournir des solutions évolutives est remarquable. Hautement recommandé!"
+        : "The team's ability to understand complex requirements and deliver scalable solutions is remarkable. Highly recommended!",
+      author: "Michael Roberts",
+      role: "CTO, FinanceFlow",
+      avatar: "MR",
+    },
+    {
+      quote: language === "fr"
+        ? "Travailler avec InnoAM a été un tournant. Ils ont livré dans les temps, dans le budget, et avec une qualité exceptionnelle."
+        : "Working with InnoAM was a game-changer. They delivered on time, within budget, and with exceptional quality.",
+      author: "Emily Watson",
+      role: language === "fr" ? "Directrice Produit, DataVerse" : "Product Director, DataVerse",
+      avatar: "EW",
+    },
+  ];
+
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Testimonials"
-          title="What our clients say"
-          description="Don't just take our word for it — hear from the companies we've helped succeed."
+          badge={t("testimonials.badge")}
+          title={t("testimonials.title")}
+          description={t("testimonials.description")}
         />
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">

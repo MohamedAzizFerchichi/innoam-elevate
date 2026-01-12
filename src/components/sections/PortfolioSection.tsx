@@ -1,42 +1,51 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { useLanguage } from "@/contexts/LanguageContext";
 import mockup1 from "@/assets/project-mockup-1.jpg";
 import mockup2 from "@/assets/project-mockup-2.jpg";
 import mockup3 from "@/assets/project-mockup-3.jpg";
 
-const projects = [
-  {
-    title: "FinTech Dashboard",
-    category: "Web Application",
-    description: "A comprehensive analytics dashboard for financial data visualization and reporting.",
-    image: mockup1,
-    technologies: ["React", "TypeScript", "D3.js"],
-  },
-  {
-    title: "Mobile Banking App",
-    category: "Mobile Development",
-    description: "Secure and intuitive mobile banking application with biometric authentication.",
-    image: mockup2,
-    technologies: ["React Native", "Node.js", "PostgreSQL"],
-  },
-  {
-    title: "AI Research Platform",
-    category: "AI & Machine Learning",
-    description: "Advanced ML platform for neural network training and model deployment.",
-    image: mockup3,
-    technologies: ["Python", "TensorFlow", "AWS"],
-  },
-];
-
 export function PortfolioSection() {
+  const { t, language } = useLanguage();
+
+  const projects = [
+    {
+      title: "MedOryx",
+      category: t("portfolio.medoryx.category"),
+      description: t("portfolio.medoryx.description"),
+      image: mockup1,
+      technologies: ["React", "Node.js", "PostgreSQL"],
+      link: "https://medoryx.tn",
+      featured: true,
+    },
+    {
+      title: language === "fr" ? "Application Bancaire Mobile" : "Mobile Banking App",
+      category: language === "fr" ? "Développement Mobile" : "Mobile Development",
+      description: language === "fr" 
+        ? "Application bancaire mobile sécurisée avec authentification biométrique."
+        : "Secure and intuitive mobile banking application with biometric authentication.",
+      image: mockup2,
+      technologies: ["React Native", "Node.js", "PostgreSQL"],
+    },
+    {
+      title: language === "fr" ? "Plateforme IA de Recherche" : "AI Research Platform",
+      category: language === "fr" ? "IA & Machine Learning" : "AI & Machine Learning",
+      description: language === "fr"
+        ? "Plateforme ML avancée pour l'entraînement de réseaux neuronaux et le déploiement de modèles."
+        : "Advanced ML platform for neural network training and model deployment.",
+      image: mockup3,
+      technologies: ["Python", "TensorFlow", "AWS"],
+    },
+  ];
+
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Portfolio"
-          title="Featured projects"
-          description="Explore some of our recent work that showcases our expertise and commitment to excellence."
+          badge={t("portfolio.badge")}
+          title={t("portfolio.title")}
+          description={t("portfolio.description")}
         />
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -48,8 +57,17 @@ export function PortfolioSection() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
               whileHover={{ y: -8 }}
-              className="group relative rounded-2xl overflow-hidden glass-card"
+              className={`group relative rounded-2xl overflow-hidden glass-card ${project.featured ? 'ring-2 ring-primary/50' : ''}`}
             >
+              {/* Featured badge */}
+              {project.featured && (
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="px-3 py-1 text-xs font-medium bg-primary text-primary-foreground rounded-full">
+                    {language === "fr" ? "En vedette" : "Featured"}
+                  </span>
+                </div>
+              )}
+
               {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <motion.img
@@ -62,18 +80,23 @@ export function PortfolioSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                 
                 {/* Hover overlay */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 bg-primary/20 backdrop-blur-sm flex items-center justify-center"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-14 h-14 rounded-full bg-background/90 flex items-center justify-center"
+                {project.link && (
+                  <motion.a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className="absolute inset-0 bg-primary/20 backdrop-blur-sm flex items-center justify-center cursor-pointer"
                   >
-                    <ExternalLink className="w-6 h-6 text-primary" />
-                  </motion.div>
-                </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      className="w-14 h-14 rounded-full bg-background/90 flex items-center justify-center"
+                    >
+                      <ExternalLink className="w-6 h-6 text-primary" />
+                    </motion.div>
+                  </motion.a>
+                )}
               </div>
 
               {/* Content */}
@@ -97,6 +120,17 @@ export function PortfolioSection() {
                     </span>
                   ))}
                 </div>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                  >
+                    {language === "fr" ? "Visiter le site" : "Visit website"}
+                    <ExternalLink size={14} />
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}

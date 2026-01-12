@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 
 export function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -23,22 +26,22 @@ export function HeroSection() {
       {/* Grid pattern */}
       <div className="absolute inset-0 grid-pattern opacity-20 z-10" />
 
-      {/* Floating orbs */}
+      {/* Floating orbs - fixed to not overlap text */}
       <motion.div
         animate={{
           y: [0, -30, 0],
-          opacity: [0.3, 0.5, 0.3],
+          opacity: [0.15, 0.25, 0.15],
         }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+        className="absolute top-1/3 left-1/6 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
       />
       <motion.div
         animate={{
           y: [0, 30, 0],
-          opacity: [0.2, 0.4, 0.2],
+          opacity: [0.1, 0.2, 0.1],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
+        className="absolute bottom-1/3 right-1/6 w-56 h-56 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
       />
 
       {/* Content */}
@@ -52,7 +55,7 @@ export function HeroSection() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm">
               <Sparkles size={14} className="animate-pulse" />
-              Transforming Ideas into Reality
+              {t("hero.badge")}
             </span>
           </motion.div>
 
@@ -63,10 +66,10 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight"
           >
-            We craft digital solutions
+            {t("hero.title1")}
             <br />
-            <span className="text-gradient">with precision</span> and{" "}
-            <span className="text-gradient">innovation</span>
+            <span className="text-gradient">{t("hero.title2")}</span> {t("hero.title3")}{" "}
+            <span className="text-gradient">{t("hero.title4")}</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -76,8 +79,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
-            From cutting-edge web applications to intelligent AI solutions, we deliver
-            technology that drives growth and transforms businesses.
+            {t("hero.subtitle")}
           </motion.p>
 
           {/* CTAs */}
@@ -89,13 +91,13 @@ export function HeroSection() {
           >
             <Link to="/contact">
               <Button variant="hero" size="xl" className="group">
-                Request a Quote
+                {t("nav.requestQuote")}
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link to="/contact">
               <Button variant="heroOutline" size="xl">
-                Contact Us
+                {t("hero.contactUs")}
               </Button>
             </Link>
           </motion.div>
@@ -108,12 +110,12 @@ export function HeroSection() {
             className="mt-20 grid grid-cols-3 gap-8 max-w-xl mx-auto"
           >
             {[
-              { value: "150+", label: "Projects Delivered" },
-              { value: "98%", label: "Client Satisfaction" },
-              { value: "10+", label: "Tech Domains" },
+              { value: "150+", labelKey: "hero.projectsDelivered" },
+              { value: "98%", labelKey: "hero.clientSatisfaction" },
+              { value: "10+", labelKey: "hero.techDomains" },
             ].map((stat, i) => (
               <motion.div
-                key={stat.label}
+                key={stat.labelKey}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
@@ -123,7 +125,7 @@ export function HeroSection() {
                   {stat.value}
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">
-                  {stat.label}
+                  {t(stat.labelKey)}
                 </div>
               </motion.div>
             ))}

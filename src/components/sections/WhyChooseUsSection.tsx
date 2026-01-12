@@ -1,41 +1,56 @@
 import { motion } from "framer-motion";
 import { Zap, Shield, Users, Rocket, Award, Clock } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-
-const features = [
-  {
-    icon: Zap,
-    title: "Rapid Development",
-    description: "Fast iteration cycles and agile methodologies ensure timely delivery without compromising quality.",
-  },
-  {
-    icon: Shield,
-    title: "Enterprise Security",
-    description: "Bank-grade security practices and compliance-first approach to protect your data.",
-  },
-  {
-    icon: Users,
-    title: "Dedicated Teams",
-    description: "Expert developers and designers committed to your project's success from start to finish.",
-  },
-  {
-    icon: Rocket,
-    title: "Scalable Solutions",
-    description: "Architecture designed to grow with your business, from startup to enterprise scale.",
-  },
-  {
-    icon: Award,
-    title: "Quality Assurance",
-    description: "Rigorous testing and code review processes guarantee exceptional product quality.",
-  },
-  {
-    icon: Clock,
-    title: "24/7 Support",
-    description: "Round-the-clock support and maintenance to keep your applications running smoothly.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function WhyChooseUsSection() {
+  const { t, language } = useLanguage();
+
+  const features = [
+    {
+      icon: Zap,
+      title: language === "fr" ? "Développement Rapide" : "Rapid Development",
+      description: language === "fr" 
+        ? "Cycles d'itération rapides et méthodologies agiles assurent une livraison ponctuelle sans compromettre la qualité."
+        : "Fast iteration cycles and agile methodologies ensure timely delivery without compromising quality.",
+    },
+    {
+      icon: Shield,
+      title: language === "fr" ? "Sécurité Enterprise" : "Enterprise Security",
+      description: language === "fr"
+        ? "Pratiques de sécurité de niveau bancaire et approche axée sur la conformité pour protéger vos données."
+        : "Bank-grade security practices and compliance-first approach to protect your data.",
+    },
+    {
+      icon: Users,
+      title: language === "fr" ? "Équipes Dédiées" : "Dedicated Teams",
+      description: language === "fr"
+        ? "Développeurs et designers experts engagés dans le succès de votre projet du début à la fin."
+        : "Expert developers and designers committed to your project's success from start to finish.",
+    },
+    {
+      icon: Rocket,
+      title: language === "fr" ? "Solutions Évolutives" : "Scalable Solutions",
+      description: language === "fr"
+        ? "Architecture conçue pour évoluer avec votre entreprise, de la startup à l'échelle entreprise."
+        : "Architecture designed to grow with your business, from startup to enterprise scale.",
+    },
+    {
+      icon: Award,
+      title: language === "fr" ? "Assurance Qualité" : "Quality Assurance",
+      description: language === "fr"
+        ? "Tests rigoureux et processus de revue de code garantissent une qualité exceptionnelle du produit."
+        : "Rigorous testing and code review processes guarantee exceptional product quality.",
+    },
+    {
+      icon: Clock,
+      title: language === "fr" ? "Support 24/7" : "24/7 Support",
+      description: language === "fr"
+        ? "Support et maintenance 24h/24 pour garder vos applications fonctionnelles en permanence."
+        : "Round-the-clock support and maintenance to keep your applications running smoothly.",
+    },
+  ];
+
   return (
     <section className="py-24 lg:py-32 relative bg-secondary/30 overflow-hidden">
       {/* Background decoration */}
@@ -43,9 +58,11 @@ export function WhyChooseUsSection() {
       
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Why Choose Us"
-          title="The InnoAM advantage"
-          description="We combine technical excellence with a client-first approach to deliver solutions that make a difference."
+          badge={t("why.badge")}
+          title={language === "fr" ? "L'avantage InnoAM" : "The InnoAM advantage"}
+          description={language === "fr" 
+            ? "Nous combinons excellence technique et approche centrée client pour des solutions qui font la différence."
+            : "We combine technical excellence with a client-first approach to deliver solutions that make a difference."}
         />
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
