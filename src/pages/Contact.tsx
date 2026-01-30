@@ -6,9 +6,6 @@ import {
   MapPin,
   Send,
   CheckCircle,
-  Linkedin,
-  Twitter,
-  Github,
 } from "lucide-react";
 import { z } from "zod";
 import { Layout } from "@/components/layout/Layout";
@@ -37,12 +34,6 @@ const contactSchema = z.object({
 });
 
 type ContactForm = z.infer<typeof contactSchema>;
-
-const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-];
 
 const Contact = () => {
   const { toast } = useToast();
@@ -200,24 +191,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Social Links */}
-              <div>
-                <h3 className="font-medium text-foreground mb-4">{t("contact.followUs")}</h3>
-                <div className="flex items-center gap-3">
-                  {socialLinks.map((social) => (
-                    <motion.a
-                      key={social.label}
-                      href={social.href}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                      aria-label={social.label}
-                    >
-                      <social.icon size={18} />
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
             </motion.div>
 
             {/* Form */}

@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-];
 
 export function Footer() {
   const { t } = useLanguage();
@@ -53,20 +47,6 @@ export function Footer() {
             <p className="mt-4 text-muted-foreground max-w-sm leading-relaxed">
               {t("footer.description")}
             </p>
-            <div className="flex items-center gap-4 mt-6">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon size={18} />
-                </motion.a>
-              ))}
-            </div>
           </div>
 
           {/* Links */}

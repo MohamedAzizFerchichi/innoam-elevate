@@ -19,9 +19,9 @@ export function TestimonialsSection() {
       quote: language === "fr"
         ? "La capacité de l'équipe à comprendre des exigences complexes et à fournir des solutions évolutives est remarquable. Hautement recommandé!"
         : "The team's ability to understand complex requirements and deliver scalable solutions is remarkable. Highly recommended!",
-      author: "Michael Roberts",
-      role: "CTO, FinanceFlow",
-      avatar: "MR",
+      author: "Mondher Khanfir",
+      role: language === "fr" ? 'Fondateur de "DeepTech Startup Rating"' : 'Founder of "DeepTech Startup Rating"',
+      avatar: "MK",
     },
     {
       quote: language === "fr"
