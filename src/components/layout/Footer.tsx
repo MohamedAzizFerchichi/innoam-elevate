@@ -17,10 +17,6 @@ export function Footer() {
       { labelKey: "services.mobileDev", href: "/services" },
       { labelKey: "services.ai", href: "/services" },
     ],
-    legal: [
-      { labelKey: "footer.privacyPolicy", href: "#" },
-      { labelKey: "footer.terms", href: "#" },
-    ],
   };
 
   return (
@@ -96,16 +92,6 @@ export function Footer() {
                   hello@innoam.com
                 </a>
               </li>
-              {footerLinks.legal.map((link) => (
-                <li key={link.labelKey}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {t(link.labelKey)}
-                  </a>
-                </li>
-              ))}
             </ul>
           </div>
         </div>

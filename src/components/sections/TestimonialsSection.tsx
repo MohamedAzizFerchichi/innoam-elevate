@@ -27,9 +27,9 @@ export function TestimonialsSection() {
       quote: language === "fr"
         ? "Travailler avec InnoAM a été un tournant. Ils ont livré dans les temps, dans le budget, et avec une qualité exceptionnelle."
         : "Working with InnoAM was a game-changer. They delivered on time, within budget, and with exceptional quality.",
-      author: "Emily Watson",
-      role: language === "fr" ? "Directrice Produit, DataVerse" : "Product Director, DataVerse",
-      avatar: "EW",
+      author: "Ahmed Trabelsi",
+      role: language === "fr" ? "Directeur Produit, ISB Immobilière" : "Product Director, ISB Immobilière",
+      avatar: "AT",
     },
   ];
 

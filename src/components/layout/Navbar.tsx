@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
+import logoImg from "@/assets/Generated image 1 (16).png";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,8 +55,12 @@ export function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-2"
               >
-                <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">I</span>
+                <div className="w-10 h-10 rounded-xl overflow-hidden bg-transparent flex items-center justify-center">
+                  <img
+                    src={logoImg}
+                    alt="InnoAM logo"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <span className="text-xl font-bold text-foreground">
                   Inno<span className="text-gradient">AM</span>
