@@ -20,22 +20,25 @@ export function PortfolioSection() {
       featured: true,
     },
     {
-      title: language === "fr" ? "Application Bancaire Mobile" : "Mobile Banking App",
-      category: language === "fr" ? "Développement Mobile" : "Mobile Development",
-      description: language === "fr" 
-        ? "Application bancaire mobile sécurisée avec authentification biométrique."
-        : "Secure and intuitive mobile banking application with biometric authentication.",
+      title: "The Life Residence – ISB Immobilière",
+      category: language === "fr" ? "Développement Web" : "Web Development",
+      description:
+        language === "fr"
+          ? "Application web pour promoteur immobilier : présentation du projet résidentiel haut de gamme, fonctionnalités, équipements et contact."
+          : "Web application for a real-estate promoter: high-end residential project showcase, features, amenities, and contact.",
       image: mockup2,
-      technologies: ["React Native", "Node.js", "PostgreSQL"],
+      technologies: ["React", "TypeScript", "TailwindCSS"],
+      link: "https://www.isbimmobiliere.com/",
     },
     {
-      title: language === "fr" ? "Plateforme IA de Recherche" : "AI Research Platform",
+      title: "DeepTech Startup Rating",
       category: language === "fr" ? "IA & Machine Learning" : "AI & Machine Learning",
       description: language === "fr"
-        ? "Plateforme ML avancée pour l'entraînement de réseaux neuronaux et le déploiement de modèles."
-        : "Advanced ML platform for neural network training and model deployment.",
+        ? "Système d'évaluation augmentée par IA utilisant des outils GPT exclusifs, pour mesurer et comparer le potentiel des startups."
+        : "An AI-Augmented Expert Rating System using exclusive GPT-powered tools to measure and compare startup potential.",
       image: mockup3,
-      technologies: ["Python", "TensorFlow", "AWS"],
+      technologies: ["OpenAI", "LangChain", "Python"],
+      link: "https://www.deeptechstartuprating.com/",
     },
   ];
 

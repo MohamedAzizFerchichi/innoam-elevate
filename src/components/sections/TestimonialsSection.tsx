@@ -11,9 +11,9 @@ export function TestimonialsSection() {
       quote: language === "fr"
         ? "InnoAM a transformé notre vision en une réalité impressionnante. Leur expertise technique et attention aux détails ont dépassé nos attentes."
         : "InnoAM transformed our vision into a stunning reality. Their technical expertise and attention to detail exceeded our expectations.",
-      author: "Sarah Chen",
-      role: "CEO, TechStart Inc.",
-      avatar: "SC",
+      author: "Anis Mahmoud",
+      role: language === "fr" ? "CEO et Fondateur de MedOryx" : "CEO & Founder of MedOryx",
+      avatar: "AM",
     },
     {
       quote: language === "fr"
