@@ -14,6 +14,7 @@ import { Layout } from "@/components/layout/Layout";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { CTASection } from "@/components/sections/CTASection";
+import SEOHead from "@/components/SEOHead";
 
 const services = [
   {
@@ -105,6 +106,11 @@ const services = [
 const Services = () => {
   return (
     <Layout>
+      <SEOHead
+        title="Services Tech : Développement Full-Stack, Mobile & IA | InnoAM"
+        description="Développement d'applications web modernes, mobiles natives et intégration de Machine Learning. Expertise en Node.js, Go et architectures Cloud."
+        canonical="https://innoam.tn/services"
+      />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-20" />

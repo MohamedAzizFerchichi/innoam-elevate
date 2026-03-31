@@ -18,6 +18,7 @@ export function Navbar() {
     { href: "/", labelKey: "nav.home" },
     { href: "/about", labelKey: "nav.about" },
     { href: "/services", labelKey: "nav.services" },
+    { href: "/blog", labelKey: "nav.blog" },
     { href: "/contact", labelKey: "nav.contact" },
   ];
 

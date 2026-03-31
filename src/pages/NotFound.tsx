@@ -2,10 +2,17 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 
 const NotFound = () => {
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+      <SEOHead
+        title="404 | Page Introuvable - InnoAM"
+        description="Cette page n'existe pas. Retournez sur InnoAM pour découvrir nos services de développement web, mobile et IA en Tunisie."
+        canonical="https://innoam.tn/404"
+        noIndex={true}
+      />
       <div className="absolute inset-0 grid-pattern opacity-20" />
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}

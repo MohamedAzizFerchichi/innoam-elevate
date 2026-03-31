@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEOHead from "@/components/SEOHead";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -95,6 +96,11 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEOHead
+        title="Contact InnoAM | Démarrez Votre Projet Digital"
+        description="Contactez InnoAM pour votre projet web, mobile ou IA en Tunisie. Réponse sous 24h. Devis gratuit et sans engagement pour votre transformation digitale."
+        canonical="https://innoam.tn/contact"
+      />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-20" />
@@ -170,10 +176,10 @@ const Contact = () => {
                     <div>
                       <h3 className="font-medium text-foreground">{t("contact.phone")}</h3>
                       <a
-                        href="tel:+21612345678"
+                        href="tel:+21624365588"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        +216 12 345 678
+                        +216 24 36 55 88
                       </a>
                     </div>
                   </div>
@@ -284,7 +290,7 @@ const Contact = () => {
                           <Label htmlFor="phone">{t("contact.formPhone")}</Label>
                           <Input
                             id="phone"
-                            placeholder="+216 12 345 678"
+                            placeholder="+216 24 36 55 88"
                             value={formData.phone || ""}
                             onChange={(e) => handleChange("phone", e.target.value)}
                           />

@@ -13,6 +13,7 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { CTASection } from "@/components/sections/CTASection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import abstractTech from "@/assets/abstract-tech-1.jpg";
+import SEOHead from "@/components/SEOHead";
 
 const About = () => {
   const { t } = useLanguage();
@@ -50,6 +51,11 @@ const About = () => {
 
   return (
     <Layout>
+      <SEOHead
+        title="À Propos d'InnoAM | Agence Digitale en Tunisie"
+        description="Découvrez InnoAM, agence digitale tunisienne avec 10+ ans d'expertise en développement web, mobile et IA. Une équipe passionnée à votre service."
+        canonical="https://innoam.tn/about"
+      />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-20" />

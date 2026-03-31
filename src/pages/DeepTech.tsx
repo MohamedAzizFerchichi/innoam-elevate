@@ -1,77 +1,87 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Calendar,
-  Users,
-  FileText,
+  Brain,
+  TrendingUp,
   BarChart3,
-  MessageSquare,
-  Shield,
+  Zap,
+  Target,
+  Database,
   Check,
-  ExternalLink,
   ArrowRight,
-  Stethoscope,
+  Sparkles,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import mockup1 from "@/assets/project-mockup-1.jpg";
+import mockup3 from "@/assets/project-mockup-3.jpg";
 import SEOHead from "@/components/SEOHead";
 
-const MedOryx = () => {
-  const { t, language } = useLanguage();
+const DeepTech = () => {
+  const { language } = useLanguage();
 
   const features = [
-    { icon: Calendar, titleKey: "medoryx.feature1Title", descKey: "medoryx.feature1Desc" },
-    { icon: FileText, titleKey: "medoryx.feature2Title", descKey: "medoryx.feature2Desc" },
-    { icon: BarChart3, titleKey: "medoryx.feature3Title", descKey: "medoryx.feature3Desc" },
-    { icon: Stethoscope, titleKey: "medoryx.feature4Title", descKey: "medoryx.feature4Desc" },
-    { icon: MessageSquare, titleKey: "medoryx.feature5Title", descKey: "medoryx.feature5Desc" },
-    { icon: Users, titleKey: "medoryx.feature6Title", descKey: "medoryx.feature6Desc" },
+    {
+      icon: Brain,
+      title: language === "fr" ? "Analyse IA par GPT" : "GPT-Powered AI Analysis",
+      desc: language === "fr" 
+        ? "Évaluation intelligente des startups utilisant les modèles GPT pour une analyse approfondie"
+        : "Intelligent startup evaluation using GPT models for in-depth analysis",
+    },
+    {
+      icon: Database,
+      title: language === "fr" ? "Analyse de Données" : "Data Analysis",
+      desc: language === "fr"
+        ? "Traitement et analyse de grandes quantités de données pour des insights précis"
+        : "Processing and analysis of large data volumes for accurate insights",
+    },
+    {
+      icon: TrendingUp,
+      title: language === "fr" ? "Scoring Prédictif" : "Predictive Scoring",
+      desc: language === "fr"
+        ? "Algorithmes de machine learning pour prédire le potentiel de croissance"
+        : "Machine learning algorithms to predict growth potential",
+    },
+    {
+      icon: BarChart3,
+      title: language === "fr" ? "Tableaux de Bord" : "Dashboards",
+      desc: language === "fr"
+        ? "Visualisation interactive des métriques clés et KPIs en temps réel"
+        : "Interactive visualization of key metrics and real-time KPIs",
+    },
+    {
+      icon: Target,
+      title: language === "fr" ? "Recommandations" : "Recommendations",
+      desc: language === "fr"
+        ? "Suggestions personnalisées basées sur l'analyse des données historiques"
+        : "Personalized suggestions based on historical data analysis",
+    },
+    {
+      icon: Zap,
+      title: language === "fr" ? "Traitement Rapide" : "Fast Processing",
+      desc: language === "fr"
+        ? "Évaluation en quelques secondes grâce à l'infrastructure cloud optimisée"
+        : "Evaluation in seconds thanks to optimized cloud infrastructure",
+    },
   ];
+
+  const technologies = ["Python", "GPT-4", "TensorFlow", "React", "Node.js", "PostgreSQL", "AWS"];
 
   const benefits = [
-    "medoryx.benefit1",
-    "medoryx.benefit2",
-    "medoryx.benefit3",
-    "medoryx.benefit4",
-    "medoryx.benefit5",
-  ];
-
-  const pricingPlans = [
-    {
-      nameKey: "medoryx.starter",
-      descKey: "medoryx.starterDesc",
-      price: "99",
-      users: "1-2",
-      features: ["medoryx.basicFeatures", "medoryx.patientRecords", "medoryx.smsReminders"],
-      popular: false,
-    },
-    {
-      nameKey: "medoryx.professional",
-      descKey: "medoryx.professionalDesc",
-      price: "199",
-      users: "3-5",
-      features: ["medoryx.basicFeatures", "medoryx.patientRecords", "medoryx.smsReminders", "medoryx.advancedReports", "medoryx.prioritySupport"],
-      popular: true,
-    },
-    {
-      nameKey: "medoryx.enterprise",
-      descKey: "medoryx.enterpriseDesc",
-      price: null,
-      users: language === "fr" ? "Illimité" : "Unlimited",
-      features: ["medoryx.basicFeatures", "medoryx.patientRecords", "medoryx.smsReminders", "medoryx.advancedReports", "medoryx.prioritySupport", "medoryx.customIntegrations", "medoryx.dedicatedManager"],
-      popular: false,
-    },
+    language === "fr" ? "Réduction du temps d'évaluation de 90%" : "90% reduction in evaluation time",
+    language === "fr" ? "Analyse objective basée sur des données" : "Objective data-driven analysis",
+    language === "fr" ? "Identification des startups à fort potentiel" : "Identification of high-potential startups",
+    language === "fr" ? "Rapports détaillés et actionnables" : "Detailed and actionable reports",
+    language === "fr" ? "Intégration avec les outils existants" : "Integration with existing tools",
   ];
 
   return (
     <Layout>
       <SEOHead
-        title="MedOryx | Logiciel Médical Tunisie - Gestion Cabinet Santé"
-        description="Logiciel médical Tunisie pour gestion de cabinet santé. MedOryx optimise rendez-vous, dossiers patients et facturation avec React, Node.js et IA."
-        canonical="https://innoam.tn/medoryx"
-        ogImage="https://innoam.tn/og-medoryx.jpg"
+        title="DeepTech Startup Rating | Évaluation IA de Startups par GPT"
+        description="Plateforme d'évaluation IA de startups avec analyse de données par GPT. Scoring prédictif et insights actionnables développés avec Python et TensorFlow."
+        canonical="https://innoam.tn/deeptech"
+        ogImage="https://innoam.tn/og-deeptech.jpg"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
@@ -91,7 +101,7 @@ const MedOryx = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-6"
               >
-                {t("medoryx.badge")}
+                {language === "fr" ? "Intelligence Artificielle" : "Artificial Intelligence"}
               </motion.span>
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
@@ -99,7 +109,7 @@ const MedOryx = () => {
                 transition={{ delay: 0.1 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight"
               >
-                <span className="text-gradient">{t("medoryx.title")}</span>
+                <span className="text-gradient">DeepTech Startup Rating</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
@@ -107,7 +117,9 @@ const MedOryx = () => {
                 transition={{ delay: 0.2 }}
                 className="mt-6 text-xl text-muted-foreground leading-relaxed"
               >
-                {t("medoryx.subtitle")}
+                {language === "fr"
+                  ? "Plateforme d'évaluation IA de startups utilisant GPT et l'analyse de données avancée pour identifier les opportunités à fort potentiel."
+                  : "AI-powered startup evaluation platform using GPT and advanced data analysis to identify high-potential opportunities."}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -115,15 +127,10 @@ const MedOryx = () => {
                 transition={{ delay: 0.3 }}
                 className="mt-8 flex flex-col sm:flex-row gap-4"
               >
-                <a href="https://medoryx.tn" target="_blank" rel="noopener noreferrer">
-                  <Button variant="hero" size="xl" className="group">
-                    {t("medoryx.visitSite")}
-                    <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </a>
                 <Link to="/contact">
-                  <Button variant="heroOutline" size="xl">
-                    {t("medoryx.requestDemo")}
+                  <Button variant="hero" size="xl" className="group">
+                    {language === "fr" ? "Demander une Démo" : "Request Demo"}
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </motion.div>
@@ -136,8 +143,8 @@ const MedOryx = () => {
             >
               <div className="relative rounded-2xl overflow-hidden glow-lg">
                 <img
-                  src={mockup1}
-                  alt="MedOryx Dashboard"
+                  src={mockup3}
+                  alt="DeepTech Platform"
                   className="w-full aspect-video object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
@@ -157,14 +164,19 @@ const MedOryx = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-              {t("medoryx.featuresTitle")}
+              {language === "fr" ? "Fonctionnalités Avancées" : "Advanced Features"}
             </h2>
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+              {language === "fr"
+                ? "Une solution complète d'évaluation alimentée par l'intelligence artificielle"
+                : "A complete evaluation solution powered by artificial intelligence"}
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
-                key={feature.titleKey}
+                key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -179,10 +191,10 @@ const MedOryx = () => {
                   <feature.icon className="w-7 h-7 text-primary-foreground" />
                 </motion.div>
                 <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-gradient transition-all duration-300">
-                  {t(feature.titleKey)}
+                  {feature.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {t(feature.descKey)}
+                  {feature.desc}
                 </p>
               </motion.div>
             ))}
@@ -190,7 +202,7 @@ const MedOryx = () => {
         </div>
       </section>
 
-      {/* Why Choose Section */}
+      {/* Benefits Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -201,7 +213,7 @@ const MedOryx = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">
-                {t("medoryx.whyTitle")}
+                {language === "fr" ? "Avantages Clés" : "Key Benefits"}
               </h2>
               <div className="space-y-4">
                 {benefits.map((benefit, index) => (
@@ -216,7 +228,7 @@ const MedOryx = () => {
                     <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-4 h-4 text-primary" />
                     </div>
-                    <p className="text-muted-foreground">{t(benefit)}</p>
+                    <p className="text-muted-foreground">{benefit}</p>
                   </motion.div>
                 ))}
               </div>
@@ -232,21 +244,21 @@ const MedOryx = () => {
               <div className="p-8 rounded-3xl glass-card">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center">
-                    <Shield className="w-8 h-8 text-primary-foreground" />
+                    <Sparkles className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-foreground">
-                      {language === "fr" ? "Sécurité Garantie" : "Security Guaranteed"}
+                      {language === "fr" ? "Propulsé par GPT-4" : "Powered by GPT-4"}
                     </h3>
                     <p className="text-muted-foreground text-sm">
-                      {language === "fr" ? "Données cryptées et sécurisées" : "Encrypted and secured data"}
+                      {language === "fr" ? "Intelligence artificielle de pointe" : "Cutting-edge artificial intelligence"}
                     </p>
                   </div>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
                   {language === "fr" 
-                    ? "MedOryx utilise les dernières technologies de sécurité pour protéger les données sensibles de vos patients. Conforme aux normes de sécurité des données de santé."
-                    : "MedOryx uses the latest security technologies to protect your patients' sensitive data. Compliant with health data security standards."}
+                    ? "DeepTech utilise les derniers modèles GPT pour analyser des milliers de points de données et fournir des évaluations précises et objectives des startups."
+                    : "DeepTech uses the latest GPT models to analyze thousands of data points and provide accurate and objective startup evaluations."}
                 </p>
               </div>
             </motion.div>
@@ -254,78 +266,29 @@ const MedOryx = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Technologies Section */}
       <section className="py-16 lg:py-24 bg-secondary/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-              {t("medoryx.pricingTitle")}
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">
+              {language === "fr" ? "Stack Technologique" : "Technology Stack"}
             </h2>
+            <div className="flex flex-wrap gap-3 justify-center max-w-3xl mx-auto">
+              {technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-4 py-2 text-sm font-medium bg-secondary rounded-lg text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {pricingPlans.map((plan, index) => (
-              <motion.div
-                key={plan.nameKey}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className={`relative p-8 rounded-2xl glass-card ${plan.popular ? 'ring-2 ring-primary' : ''}`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1 text-xs font-medium bg-primary text-primary-foreground rounded-full">
-                      {language === "fr" ? "Populaire" : "Popular"}
-                    </span>
-                  </div>
-                )}
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-foreground mb-1">
-                    {t(plan.nameKey)}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {t(plan.descKey)}
-                  </p>
-                  <div className="mb-2">
-                    {plan.price ? (
-                      <span className="text-4xl font-bold text-gradient">{plan.price} TND</span>
-                    ) : (
-                      <span className="text-2xl font-bold text-gradient">{t("medoryx.customPricing")}</span>
-                    )}
-                    {plan.price && (
-                      <span className="text-muted-foreground text-sm">{t("medoryx.perMonth")}</span>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {plan.users} {t("medoryx.users")}
-                  </p>
-                </div>
-                <div className="space-y-3 mb-8">
-                  {plan.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-primary" />
-                      <span className="text-sm text-muted-foreground">{t(feature)}</span>
-                    </div>
-                  ))}
-                </div>
-                <Link to="/contact" className="block">
-                  <Button 
-                    variant={plan.popular ? "hero" : "outline"} 
-                    className="w-full"
-                  >
-                    {plan.price ? t("medoryx.getStarted") : t("medoryx.contactSales")}
-                    <ArrowRight size={16} />
-                  </Button>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -345,27 +308,20 @@ const MedOryx = () => {
             <div className="relative z-10">
               <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                 {language === "fr" 
-                  ? "Prêt à moderniser votre cabinet médical?"
-                  : "Ready to modernize your medical practice?"}
+                  ? "Besoin d'une solution d'évaluation IA?"
+                  : "Need an AI evaluation solution?"}
               </h2>
               <p className="text-white/80 mb-8 max-w-xl mx-auto">
                 {language === "fr"
-                  ? "Contactez-nous pour une démonstration gratuite de MedOryx et découvrez comment nous pouvons simplifier la gestion de votre cabinet."
-                  : "Contact us for a free demo of MedOryx and discover how we can simplify your practice management."}
+                  ? "Contactez-nous pour développer votre plateforme d'analyse alimentée par l'intelligence artificielle."
+                  : "Contact us to develop your AI-powered analysis platform."}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://medoryx.tn" target="_blank" rel="noopener noreferrer">
-                  <Button size="xl" className="bg-white text-primary hover:bg-white/90">
-                    {t("medoryx.visitSite")}
-                    <ExternalLink size={18} />
-                  </Button>
-                </a>
-                <Link to="/contact">
-                  <Button size="xl" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                    {t("medoryx.requestDemo")}
-                  </Button>
-                </Link>
-              </div>
+              <Link to="/contact">
+                <Button size="xl" className="bg-white text-primary hover:bg-white/90">
+                  {language === "fr" ? "Démarrer Votre Projet" : "Start Your Project"}
+                  <ArrowRight size={18} />
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -374,4 +330,4 @@ const MedOryx = () => {
   );
 };
 
-export default MedOryx;
+export default DeepTech;

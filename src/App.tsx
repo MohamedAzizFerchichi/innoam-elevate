@@ -10,6 +10,10 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import MedOryx from "./pages/MedOryx";
+import TheLifeResidence from "./pages/TheLifeResidence";
+import DeepTech from "./pages/DeepTech";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +32,10 @@ const App = () => (
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/medoryx" element={<MedOryx />} />
+              <Route path="/the-life-residence" element={<TheLifeResidence />} />
+              <Route path="/deeptech" element={<DeepTech />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AnimatePresence>

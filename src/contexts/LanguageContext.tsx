@@ -14,6 +14,7 @@ export const translations: Translations = {
   "nav.home": { en: "Home", fr: "Accueil" },
   "nav.about": { en: "About", fr: "À propos" },
   "nav.services": { en: "Services", fr: "Services" },
+  "nav.blog": { en: "Blog", fr: "Blog" },
   "nav.contact": { en: "Contact", fr: "Contact" },
   "nav.requestQuote": { en: "Request a Quote", fr: "Demander un devis" },
   "nav.products": { en: "Products", fr: "Produits" },
