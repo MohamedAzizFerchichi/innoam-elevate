@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "@vercel/node@3.0.0"
+    }
+  },
+  "env": {
+    "RESEND_API_KEY": "@resend-api-key"
+  }
+}

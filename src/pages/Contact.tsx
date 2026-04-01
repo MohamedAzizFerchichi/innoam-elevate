@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 import SEOHead from "@/components/SEOHead";
 
 const contactSchema = z.object({
@@ -76,15 +77,86 @@ const Contact = () => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    toast({
-      title: language === "fr" ? "Message envoyé!" : "Message sent!",
-      description: language === "fr" ? "Nous vous répondrons dans les 24 heures." : "We'll get back to you within 24 hours.",
-    });
+    try {
+      // Insérer les données dans Supabase
+      const { data, error } = await supabase
+        .from('contact_messages')
+        .insert([
+          {
+            name: result.data.name,
+            company: result.data.company || null,
+            email: result.data.email,
+            phone: result.data.phone || null,
+            project_type: result.data.projectType,
+            budget: result.data.budget || null,
+            message: result.data.message,
+            language: language,
+          }
+        ])
+        .select();
+
+      if (error) {
+        console.error('Supabase error:', error);
+        toast({
+          title: language === "fr" ? "Erreur" : "Error",
+          description: language === "fr" 
+            ? "Une erreur est survenue. Veuillez réessayer." 
+            : "An error occurred. Please try again.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Envoyer l'email de notification via Resend
+      try {
+        const emailResponse = await fetch('/api/send-contact-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: result.data.name,
+            company: result.data.company,
+            email: result.data.email,
+            phone: result.data.phone,
+            projectType: result.data.projectType,
+            budget: result.data.budget,
+            message: result.data.message,
+            language: language,
+          }),
+        });
+
+        if (!emailResponse.ok) {
+          console.error('Email notification failed:', await emailResponse.text());
+          // Ne pas bloquer l'utilisateur si l'email échoue
+        }
+      } catch (emailError) {
+        console.error('Email notification error:', emailError);
+        // Ne pas bloquer l'utilisateur si l'email échoue
+      }
+
+      // Succès
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      setFormData({});
+      toast({
+        title: language === "fr" ? "Message envoyé!" : "Message sent!",
+        description: language === "fr" 
+          ? "Nous vous répondrons dans les 24 heures." 
+          : "We'll get back to you within 24 hours.",
+      });
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: language === "fr" ? "Erreur" : "Error",
+        description: language === "fr" 
+          ? "Une erreur inattendue est survenue." 
+          : "An unexpected error occurred.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: keyof ContactForm, value: string) => {
@@ -362,11 +434,16 @@ const Contact = () => {
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
-                          />
+                          <>
+                            <motion.div
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                              className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
+                            />
+                            <span className="ml-2">
+                              {language === "fr" ? "Envoi en cours..." : "Sending..."}
+                            </span>
+                          </>
                         ) : (
                           <>
                             {t("contact.sendMessage")}
