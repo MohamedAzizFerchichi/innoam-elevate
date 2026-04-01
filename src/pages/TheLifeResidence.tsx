@@ -73,8 +73,8 @@ const TheLifeResidence = () => {
       <SEOHead
         title="The Life Residence | Plateforme Immobilière Haut de Gamme"
         description="Plateforme immobilière haut de gamme avec expérience utilisateur (UX) exceptionnelle. Développée avec React et Node.js pour une navigation fluide."
-        canonical="https://innoam.tn/the-life-residence"
-        ogImage="https://innoam.tn/og-life-residence.jpg"
+        canonical="https://innoamsoftware.tn/the-life-residence"
+        ogImage="https://innoamsoftware.tn/og-life-residence.jpg"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">

@@ -10,7 +10,7 @@ const NotFound = () => {
       <SEOHead
         title="404 | Page Introuvable - InnoAM"
         description="Cette page n'existe pas. Retournez sur InnoAM pour découvrir nos services de développement web, mobile et IA en Tunisie."
-        canonical="https://innoam.tn/404"
+        canonical="https://innoamsoftware.tn/404"
         noIndex={true}
       />
       <div className="absolute inset-0 grid-pattern opacity-20" />

@@ -54,7 +54,7 @@ const About = () => {
       <SEOHead
         title="À Propos d'InnoAM | Agence Digitale en Tunisie"
         description="Découvrez InnoAM, agence digitale tunisienne avec 10+ ans d'expertise en développement web, mobile et IA. Une équipe passionnée à votre service."
-        canonical="https://innoam.tn/about"
+        canonical="https://innoamsoftware.tn/about"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
@@ -221,9 +221,9 @@ const About = () => {
                 <AnimatedCounter
                   end={stat.value}
                   suffix={stat.suffix}
-                  className="text-4xl lg:text-5xl font-bold text-gradient"
+                  className="text-4xl lg:text-5xl font-bold text-white"
                 />
-                <div className="mt-2 text-muted-foreground">{t(stat.labelKey)}</div>
+                <div className="mt-2 text-sm lg:text-base text-slate-300">{t(stat.labelKey)}</div>
               </motion.div>
             ))}
           </div>

@@ -109,9 +109,9 @@ const BlogPost = () => {
       <SEOHead
         title={`${post.title} | Blog InnoAM`}
         description={post.excerpt}
-        canonical={`https://innoam.tn/blog/${slug}`}
+        canonical={`https://innoamsoftware.tn/blog/${slug}`}
         ogType="article"
-        ogImage={`https://innoam.tn${post.image}`}
+        ogImage={`https://innoamsoftware.tn${post.image}`}
       />
 
       {/* Hero Section */}

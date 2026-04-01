@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useInView, motion } from "framer-motion";
+import { useInView, motion, useMotionValue, useSpring } from "framer-motion";
 
 interface AnimatedCounterProps {
   end: number;
@@ -16,34 +16,29 @@ export function AnimatedCounter({
   prefix = "",
   className = "",
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const hasAnimated = useRef(false);
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 60,
+    stiffness: 100,
+    duration: duration,
+  });
+  const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
-    if (isInView && !hasAnimated.current) {
-      hasAnimated.current = true;
-      const startTime = Date.now();
-      const endTime = startTime + duration * 1000;
-
-      const tick = () => {
-        const now = Date.now();
-        const progress = Math.min(1, (now - startTime) / (duration * 1000));
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        
-        setCount(Math.floor(easeOutQuart * end));
-
-        if (now < endTime) {
-          requestAnimationFrame(tick);
-        } else {
-          setCount(end);
-        }
-      };
-
-      requestAnimationFrame(tick);
+    if (isInView) {
+      motionValue.set(end);
     }
-  }, [isInView, end, duration]);
+  }, [isInView, end, motionValue]);
+
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest) => {
+      setDisplayValue(Math.round(latest));
+    });
+
+    return () => unsubscribe();
+  }, [springValue]);
 
   return (
     <motion.span
@@ -53,7 +48,7 @@ export function AnimatedCounter({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
     >
-      {prefix}{count}{suffix}
+      {prefix}{displayValue}{suffix}
     </motion.span>
   );
 }

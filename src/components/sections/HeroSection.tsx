@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -110,9 +111,9 @@ export function HeroSection() {
             className="mt-20 grid grid-cols-3 gap-8 max-w-xl mx-auto"
           >
             {[
-              { value: "150+", labelKey: "hero.projectsDelivered" },
-              { value: "98%", labelKey: "hero.clientSatisfaction" },
-              { value: "10+", labelKey: "hero.techDomains" },
+              { value: 150, suffix: "+", labelKey: "hero.projectsDelivered" },
+              { value: 98, suffix: "%", labelKey: "hero.clientSatisfaction" },
+              { value: 10, suffix: "+", labelKey: "hero.techDomains" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.labelKey}
@@ -121,10 +122,12 @@ export function HeroSection() {
                 transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
                 className="text-center"
               >
-                <div className="text-2xl sm:text-3xl font-bold text-gradient">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
+                <AnimatedCounter
+                  end={stat.value}
+                  suffix={stat.suffix}
+                  className="text-2xl sm:text-3xl font-bold text-white"
+                />
+                <div className="text-sm text-slate-300 mt-1">
                   {t(stat.labelKey)}
                 </div>
               </motion.div>

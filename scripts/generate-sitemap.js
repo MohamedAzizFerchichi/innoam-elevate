@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BASE_URL = 'https://innoam.tn';
+const BASE_URL = 'https://innoamsoftware.tn';
 
 // Liste de toutes les routes de votre application
 const routes = [

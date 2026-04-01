@@ -14,7 +14,7 @@ const Index = () => {
       <SEOHead
         title="InnoAM | Agence de Développement Web & solutions IA en Tunisie"
         description="InnoAM crée des solutions digitales sur mesure : applications web (React/Next.js), SaaS et systèmes d'IA intelligents pour transformer votre entreprise."
-        canonical="https://innoam.tn"
+        canonical="https://innoamsoftware.tn"
       />
       <HeroSection />
       <ServicesSection />

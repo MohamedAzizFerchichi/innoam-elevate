@@ -251,6 +251,17 @@ export const translations: Translations = {
   "medoryx.customIntegrations": { en: "Custom integrations", fr: "Intégrations personnalisées" },
   "medoryx.dedicatedManager": { en: "Dedicated account manager", fr: "Gestionnaire de compte dédié" },
   "medoryx.customPricing": { en: "Custom pricing", fr: "Tarification personnalisée" },
+
+  // Services Page
+  "servicesPage.badge": { en: "Our Services", fr: "Nos Services" },
+  "servicesPage.title": { en: "Comprehensive", fr: "Solutions digitales" },
+  "servicesPage.titleHighlight": { en: "digital solutions", fr: "complètes" },
+  "servicesPage.subtitle": { 
+    en: "From concept to deployment, we offer a full spectrum of technology services to bring your vision to life.", 
+    fr: "Du concept au déploiement, nous offrons un éventail complet de services technologiques pour donner vie à votre vision." 
+  },
+  "servicesPage.getStarted": { en: "Get Started", fr: "Commencer" },
+  "servicesPage.expertSolutions": { en: "Expert solutions tailored to your needs", fr: "Solutions expertes adaptées à vos besoins" },
 };
 
 interface LanguageContextType {

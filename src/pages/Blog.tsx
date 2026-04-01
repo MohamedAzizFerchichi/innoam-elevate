@@ -45,7 +45,7 @@ const Blog = () => {
       <SEOHead
         title="Blog InnoAM | Actualités Tech, IA et Développement Web"
         description="Découvrez nos articles sur l'intelligence artificielle, le développement web, React, Node.js et les tendances tech en Tunisie."
-        canonical="https://innoam.tn/blog"
+        canonical="https://innoamsoftware.tn/blog"
       />
 
       {/* Hero Section */}

@@ -70,8 +70,8 @@ const MedOryx = () => {
       <SEOHead
         title="MedOryx | Logiciel Médical Tunisie - Gestion Cabinet Santé"
         description="Logiciel médical Tunisie pour gestion de cabinet santé. MedOryx optimise rendez-vous, dossiers patients et facturation avec React, Node.js et IA."
-        canonical="https://innoam.tn/medoryx"
-        ogImage="https://innoam.tn/og-medoryx.jpg"
+        canonical="https://innoamsoftware.tn/medoryx"
+        ogImage="https://innoamsoftware.tn/og-medoryx.jpg"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">

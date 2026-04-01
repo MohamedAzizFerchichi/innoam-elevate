@@ -14,6 +14,7 @@ import { Layout } from "@/components/layout/Layout";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { CTASection } from "@/components/sections/CTASection";
+import { useLanguage } from "@/contexts/LanguageContext";
 import SEOHead from "@/components/SEOHead";
 
 const services = [
@@ -104,12 +105,131 @@ const services = [
 ];
 
 const Services = () => {
+  const { t, language } = useLanguage();
+
+  const services = [
+    {
+      icon: Globe,
+      titleKey: "services.webDev",
+      descKey: "services.webDevDesc",
+      features: language === "fr" ? [
+        "Applications monopages (SPA)",
+        "Applications Web progressives (PWA)",
+        "Plateformes e-commerce",
+        "Portails web personnalisés",
+        "Développement & intégration d'API",
+      ] : [
+        "Single Page Applications (SPA)",
+        "Progressive Web Apps (PWA)",
+        "E-commerce platforms",
+        "Custom web portals",
+        "API development & integration",
+      ],
+      technologies: ["React", "Next.js", "Vue", "TypeScript", "Node.js"],
+    },
+    {
+      icon: Smartphone,
+      titleKey: "services.mobileDev",
+      descKey: "services.mobileDevDesc",
+      features: language === "fr" ? [
+        "Applications iOS & Android",
+        "Solutions cross-platform",
+        "Optimisation App Store",
+        "Notifications push",
+        "Fonctionnalité hors ligne",
+      ] : [
+        "iOS & Android apps",
+        "Cross-platform solutions",
+        "App Store optimization",
+        "Push notifications",
+        "Offline functionality",
+      ],
+      technologies: ["React Native", "Flutter", "Swift", "Kotlin"],
+    },
+    {
+      icon: Server,
+      titleKey: "services.fullStack",
+      descKey: "services.fullStackDesc",
+      features: language === "fr" ? [
+        "Architecture microservices",
+        "Conception & optimisation de bases de données",
+        "Infrastructure cloud (AWS, GCP)",
+        "Pipelines CI/CD",
+        "Systèmes multi-tenants",
+      ] : [
+        "Microservices architecture",
+        "Database design & optimization",
+        "Cloud infrastructure (AWS, GCP)",
+        "CI/CD pipelines",
+        "Multi-tenant systems",
+      ],
+      technologies: ["Node.js", "Python", "PostgreSQL", "Docker", "Kubernetes"],
+    },
+    {
+      icon: Brain,
+      titleKey: "services.ai",
+      descKey: "services.aiDesc",
+      features: language === "fr" ? [
+        "Analyses prédictives",
+        "Traitement du langage naturel",
+        "Systèmes de vision par ordinateur",
+        "Moteurs de recommandation",
+        "Chatbots & assistants virtuels",
+      ] : [
+        "Predictive analytics",
+        "Natural language processing",
+        "Computer vision systems",
+        "Recommendation engines",
+        "Chatbots & virtual assistants",
+      ],
+      technologies: ["Python", "TensorFlow", "PyTorch", "OpenAI", "LangChain"],
+    },
+    {
+      icon: BarChart3,
+      titleKey: "services.dataAnalytics",
+      descKey: "services.dataAnalyticsDesc",
+      features: language === "fr" ? [
+        "Visualisation de données",
+        "Tableaux de bord en temps réel",
+        "Pipelines ETL",
+        "Entrepôts de données",
+        "Rapports personnalisés",
+      ] : [
+        "Data visualization",
+        "Real-time dashboards",
+        "ETL pipelines",
+        "Data warehousing",
+        "Custom reporting",
+      ],
+      technologies: ["Python", "SQL", "Tableau", "Power BI", "Apache Spark"],
+    },
+    {
+      icon: Lightbulb,
+      titleKey: "services.consulting",
+      descKey: "services.consultingDesc",
+      features: language === "fr" ? [
+        "Revue d'architecture",
+        "Audits technologiques",
+        "Stratégie de transformation digitale",
+        "Renforcement d'équipe",
+        "Formation technique",
+      ] : [
+        "Architecture review",
+        "Technology audits",
+        "Digital transformation strategy",
+        "Team augmentation",
+        "Technical training",
+      ],
+      technologies: ["Agile", "DevOps", "Cloud", "Security", "Best Practices"],
+    },
+  ];
+
   return (
     <Layout>
       <SEOHead
         title="Services Tech : Développement Full-Stack, Mobile & IA | InnoAM"
         description="Développement d'applications web modernes, mobiles natives et intégration de Machine Learning. Expertise en Node.js, Go et architectures Cloud."
-        canonical="https://innoam.tn/services"
+        canonical="https://innoamsoftware.tn/services"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
@@ -127,7 +247,7 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-6"
           >
-            Our Services
+            {t("servicesPage.badge")}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -135,7 +255,7 @@ const Services = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight max-w-3xl mx-auto"
           >
-            Comprehensive <span className="text-gradient">digital solutions</span>
+            {t("servicesPage.title")} <span className="text-gradient">{t("servicesPage.titleHighlight")}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -143,8 +263,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto"
           >
-            From concept to deployment, we offer a full spectrum of technology
-            services to bring your vision to life.
+            {t("servicesPage.subtitle")}
           </motion.p>
         </div>
       </section>
@@ -173,10 +292,10 @@ const Services = () => {
                     <service.icon className="w-8 h-8 text-primary-foreground" />
                   </motion.div>
                   <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                    {service.title}
+                    {t(service.titleKey)}
                   </h2>
                   <p className="text-lg text-muted-foreground mb-8">
-                    {service.description}
+                    {t(service.descKey)}
                   </p>
 
                   {/* Features */}
@@ -211,7 +330,7 @@ const Services = () => {
 
                   <Link to="/contact">
                     <Button variant="hero" className="group">
-                      Get Started
+                      {t("servicesPage.getStarted")}
                       <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
@@ -236,10 +355,10 @@ const Services = () => {
                       </div>
                     </motion.div>
                     <h3 className="mt-8 text-2xl font-bold text-foreground">
-                      {service.title}
+                      {t(service.titleKey)}
                     </h3>
                     <p className="mt-2 text-muted-foreground text-sm">
-                      Expert solutions tailored to your needs
+                      {t("servicesPage.expertSolutions")}
                     </p>
                   </div>
                   {/* Decorative elements */}

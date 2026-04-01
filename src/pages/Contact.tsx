@@ -99,7 +99,7 @@ const Contact = () => {
       <SEOHead
         title="Contact InnoAM | Démarrez Votre Projet Digital"
         description="Contactez InnoAM pour votre projet web, mobile ou IA en Tunisie. Réponse sous 24h. Devis gratuit et sans engagement pour votre transformation digitale."
-        canonical="https://innoam.tn/contact"
+        canonical="https://innoamsoftware.tn/contact"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">

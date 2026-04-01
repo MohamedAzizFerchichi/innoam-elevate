@@ -80,8 +80,8 @@ const DeepTech = () => {
       <SEOHead
         title="DeepTech Startup Rating | Évaluation IA de Startups par GPT"
         description="Plateforme d'évaluation IA de startups avec analyse de données par GPT. Scoring prédictif et insights actionnables développés avec Python et TensorFlow."
-        canonical="https://innoam.tn/deeptech"
-        ogImage="https://innoam.tn/og-deeptech.jpg"
+        canonical="https://innoamsoftware.tn/deeptech"
+        ogImage="https://innoamsoftware.tn/og-deeptech.jpg"
       />
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
