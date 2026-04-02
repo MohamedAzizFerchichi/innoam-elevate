@@ -224,7 +224,7 @@ export default async function handler(req: Request) {
     // Send email via Resend
     const { data, error } = await resend.emails.send({
       from: 'InnoAM <onboarding@resend.dev>',
-      to: ['ton-aniswashere7@gmail.com'],
+      to: ['contactinnoam@gmail.com'],
       subject: `🚀 Nouveau projet InnoAM : ${formData.name}`,
       html: htmlContent,
       replyTo: formData.email,

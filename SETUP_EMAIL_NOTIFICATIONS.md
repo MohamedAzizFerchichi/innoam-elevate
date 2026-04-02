@@ -67,12 +67,12 @@ Vercel déploiera automatiquement l'Edge Function.
 1. Va sur `https://innoamsoftware.tn/contact`
 2. Remplis le formulaire
 3. Soumets
-4. Vérifie ton email : **ton-aniswashere7@gmail.com**
+4. Vérifie ton email : **contactinnoam@gmail.com**
 
 ## 📧 Format de l'email
 
 **De :** InnoAM <onboarding@resend.dev>  
-**À :** ton-aniswashere7@gmail.com  
+**À :** contactinnoam@gmail.com  
 **Objet :** 🚀 Nouveau projet InnoAM : [Nom du client]
 
 **Contenu :**
@@ -96,13 +96,13 @@ Vercel déploiera automatiquement l'Edge Function.
 Dans `api/send-contact-email.ts`, ligne 155 :
 
 ```typescript
-to: ['ton-aniswashere7@gmail.com'],  // Change ici
+to: ['contactinnoam@gmail.com'],  // Change ici
 ```
 
 Plusieurs destinataires :
 
 ```typescript
-to: ['ton-aniswashere7@gmail.com', 'contact@innoamsoftware.tn'],
+to: ['contactinnoam@gmail.com', 'contact@innoamsoftware.tn'],
 ```
 
 ### Utiliser ton propre domaine
