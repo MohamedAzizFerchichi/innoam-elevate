@@ -9,6 +9,8 @@ interface SEOHeadProps {
   ogImage?: string;
   ogType?: "website" | "article";
   noIndex?: boolean;
+  keywords?: string;
+  author?: string;
 }
 
 const DEFAULT_TITLE = "InnoAM | Développement Web & IA en Tunisie";
@@ -23,15 +25,62 @@ export default function SEOHead({
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   noIndex = false,
+  keywords,
+  author = "InnoAM",
 }: SEOHeadProps) {
+  // Structured Data for Organization
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "InnoAM",
+    "url": BASE_URL,
+    "logo": `${BASE_URL}/logo.png`,
+    "description": "Agence de développement web et solutions IA en Tunisie",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "TN",
+      "addressLocality": "Tunisie"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+216-24-36-55-88",
+      "contactType": "customer service",
+      "email": "contactinnoam@gmail.com",
+      "availableLanguage": ["fr", "en"]
+    },
+    "sameAs": [
+      // Add your social media URLs here when available
+    ]
+  };
+
+  // Structured Data for Website
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "InnoAM",
+    "url": BASE_URL,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${BASE_URL}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <Helmet>
       {/* Base */}
       <html lang="fr" />
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
+      <meta name="author" content={author} />
       <link rel="canonical" href={canonical} />
       <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
+      
+      {/* Additional SEO Meta Tags */}
+      <meta name="theme-color" content="#0B1120" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
       {/* Open Graph */}
       <meta property="og:type" content={ogType} />
@@ -41,6 +90,7 @@ export default function SEOHead({
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={title} />
       <meta property="og:locale" content="fr_TN" />
       <meta property="og:site_name" content="InnoAM" />
 
@@ -50,6 +100,16 @@ export default function SEOHead({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content={title} />
+      <meta name="twitter:creator" content="@InnoAM" />
+
+      {/* Structured Data - JSON-LD */}
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(websiteSchema)}
+      </script>
     </Helmet>
   );
 }
