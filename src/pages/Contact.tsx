@@ -61,10 +61,13 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🚀 Début de la soumission du formulaire');
+    console.log('📋 FormData brut:', formData);
     setErrors({});
 
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
+      console.error('❌ Validation échouée:', result.error.errors);
       const fieldErrors: Partial<Record<keyof ContactForm, string>> = {};
       result.error.errors.forEach((err) => {
         if (err.path[0]) {
@@ -75,41 +78,54 @@ const Contact = () => {
       return;
     }
 
+    console.log('✅ Validation réussie:', result.data);
+
     setIsSubmitting(true);
     
     try {
+      // Préparer les données à envoyer (noms de colonnes en français)
+      const dataToInsert = {
+        nom: result.data.name,
+        entreprise: result.data.company || null,
+        email: result.data.email,
+        telephone: result.data.phone || null,
+        type_projet: result.data.projectType,
+        budget: result.data.budget || null,
+        message: result.data.message,
+      };
+
+      console.log('📤 Données envoyées à Supabase:', dataToInsert);
+
       // Insérer les données dans Supabase
       const { data, error } = await supabase
         .from('contact_messages')
-        .insert([
-          {
-            name: result.data.name,
-            company: result.data.company || null,
-            email: result.data.email,
-            phone: result.data.phone || null,
-            project_type: result.data.projectType,
-            budget: result.data.budget || null,
-            message: result.data.message,
-            language: language,
-          }
-        ])
+        .insert([dataToInsert])
         .select();
 
       if (error) {
-        console.error('Supabase error:', error);
+        console.error('❌ Erreur Supabase:', error);
+        console.error('❌ Détails de l\'erreur:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code,
+        });
         toast({
           title: language === "fr" ? "Erreur" : "Error",
           description: language === "fr" 
-            ? "Une erreur est survenue. Veuillez réessayer." 
-            : "An error occurred. Please try again.",
+            ? `Erreur: ${error.message}` 
+            : `Error: ${error.message}`,
           variant: "destructive",
         });
         setIsSubmitting(false);
         return;
       }
 
+      console.log('✅ Données insérées avec succès:', data);
+
       // Envoyer l'email de notification via Resend
       try {
+        console.log('📧 Envoi de l\'email de notification...');
         const emailResponse = await fetch('/api/send-contact-email', {
           method: 'POST',
           headers: {
@@ -128,15 +144,19 @@ const Contact = () => {
         });
 
         if (!emailResponse.ok) {
-          console.error('Email notification failed:', await emailResponse.text());
+          const errorText = await emailResponse.text();
+          console.error('❌ Email notification failed:', errorText);
           // Ne pas bloquer l'utilisateur si l'email échoue
+        } else {
+          console.log('✅ Email envoyé avec succès');
         }
       } catch (emailError) {
-        console.error('Email notification error:', emailError);
+        console.error('❌ Email notification error:', emailError);
         // Ne pas bloquer l'utilisateur si l'email échoue
       }
 
       // Succès
+      console.log('🎉 Formulaire soumis avec succès!');
       setIsSubmitting(false);
       setIsSuccess(true);
       setFormData({});
@@ -147,7 +167,7 @@ const Contact = () => {
           : "We'll get back to you within 24 hours.",
       });
     } catch (error) {
-      console.error('Unexpected error:', error);
+      console.error('❌ Erreur inattendue:', error);
       toast({
         title: language === "fr" ? "Erreur" : "Error",
         description: language === "fr" 

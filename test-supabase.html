@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Supabase Connection</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #0B1120;
+      color: white;
+    }
+    .status {
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      font-family: monospace;
+    }
+    .success { background: #10b981; }
+    .error { background: #ef4444; }
+    .info { background: #3b82f6; }
+    button {
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px;
+    }
+    button:hover { background: #7c3aed; }
+    pre {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Test de connexion Supabase</h1>
+  
+  <div id="config" class="status info">
+    <strong>Configuration:</strong><br>
+    URL: <span id="url"></span><br>
+    Key: <span id="key"></span>
+  </div>
+
+  <button onclick="testConnection()">1️⃣ Tester la connexion</button>
+  <button onclick="testInsert()">2️⃣ Tester l'insertion</button>
+  <button onclick="testRead()">3️⃣ Lire les messages</button>
+
+  <div id="results"></div>
+
+  <script>
+    // Configuration (remplacez par vos vraies valeurs)
+    const SUPABASE_URL = 'https://cvliahvbqbubayorfutw.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_0fk-5bPAY69I3B8nWSNcvA_9ga6hNaI';
+
+    document.getElementById('url').textContent = SUPABASE_URL;
+    document.getElementById('key').textContent = SUPABASE_KEY.substring(0, 20) + '...';
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    function addResult(message, type = 'info') {
+      const div = document.createElement('div');
+      div.className = `status ${type}`;
+      div.innerHTML = message;
+      document.getElementById('results').appendChild(div);
+    }
+
+    async function testConnection() {
+      document.getElementById('results').innerHTML = '';
+      addResult('🔄 Test de connexion en cours...', 'info');
+      
+      try {
+        const { data, error } = await supabase
+          .from('contact_messages')
+          .select('count')
+          .limit(1);
+
+        if (error) {
+          addResult(`❌ Erreur: ${error.message}<br><pre>${JSON.stringify(error, null, 2)}</pre>`, 'error');
+        } else {
+          addResult('✅ Connexion réussie! La table contact_messages est accessible.', 'success');
+        }
+      } catch (err) {
+        addResult(`❌ Erreur inattendue: ${err.message}`, 'error');
+      }
+    }
+
+    async function testInsert() {
+      document.getElementById('results').innerHTML = '';
+      addResult('🔄 Test d\'insertion en cours...', 'info');
+
+      const testData = {
+        name: 'Test User',
+        company: 'Test Company',
+        email: 'test@example.com',
+        phone: '+216 12 34 56 78',
+        project_type: 'Test Project',
+        budget: '10 000 - 25 000 TND',
+        message: 'Ceci est un message de test pour vérifier l\'insertion dans Supabase.',
+        language: 'fr'
+      };
+
+      addResult(`📤 Données à insérer:<br><pre>${JSON.stringify(testData, null, 2)}</pre>`, 'info');
+
+      try {
+        const { data, error } = await supabase
+          .from('contact_messages')
+          .insert([testData])
+          .select();
+
+        if (error) {
+          addResult(`❌ Erreur d'insertion: ${error.message}<br><pre>${JSON.stringify(error, null, 2)}</pre>`, 'error');
+        } else {
+          addResult(`✅ Insertion réussie!<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
+        }
+      } catch (err) {
+        addResult(`❌ Erreur inattendue: ${err.message}`, 'error');
+      }
+    }
+
+    async function testRead() {
+      document.getElementById('results').innerHTML = '';
+      addResult('🔄 Lecture des messages...', 'info');
+
+      try {
+        const { data, error } = await supabase
+          .from('contact_messages')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(5);
+
+        if (error) {
+          addResult(`❌ Erreur de lecture: ${error.message}<br><pre>${JSON.stringify(error, null, 2)}</pre>`, 'error');
+        } else {
+          addResult(`✅ ${data.length} message(s) trouvé(s):<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
+        }
+      } catch (err) {
+        addResult(`❌ Erreur inattendue: ${err.message}`, 'error');
+      }
+    }
+  </script>
+</body>
+</html>
