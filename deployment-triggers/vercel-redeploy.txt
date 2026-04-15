@@ -1,1 +1,4 @@
-Last Vercel redeploy trigger: repository bootstrap
+Last Vercel redeploy trigger: 2026-04-15T10:39:57Z
+Source actor: Copilot
+Source branch: copilot/update-node-version-settings
+Source commit: a763c4249bf869c5f678cf0b46a5ec0f157d65b5
