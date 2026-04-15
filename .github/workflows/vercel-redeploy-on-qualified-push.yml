@@ -10,14 +10,18 @@ permissions:
 
 jobs:
   trigger-vercel-redeploy:
-    if: github.actor == 'guesswho' || contains(github.actor, 'copilot') || contains(github.actor, 'Copilot')
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Normalize triggering actor
+        id: actor
+        run: echo "value=${GITHUB_ACTOR,,}" >> "$GITHUB_OUTPUT"
+
       - name: Update the tracked redeploy marker
+        if: steps.actor.outputs.value == 'guesswho' || contains(steps.actor.outputs.value, 'copilot')
         run: |
           mkdir -p deployment-triggers
           {
@@ -28,6 +32,7 @@ jobs:
           } > deployment-triggers/vercel-redeploy.txt
 
       - name: Commit and push the redeploy marker
+        if: steps.actor.outputs.value == 'guesswho' || contains(steps.actor.outputs.value, 'copilot')
         run: |
           git config user.name "${{ github.repository_owner }}"
           git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
