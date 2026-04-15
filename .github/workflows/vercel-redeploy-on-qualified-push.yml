@@ -1,0 +1,37 @@
+name: Trigger Vercel Redeploy
+
+on:
+  push:
+    paths-ignore:
+      - 'deployment-triggers/vercel-redeploy.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  trigger-vercel-redeploy:
+    if: github.actor == 'guesswho' || contains(github.actor, 'copilot') || contains(github.actor, 'Copilot')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Update the tracked redeploy marker
+        run: |
+          mkdir -p deployment-triggers
+          {
+            echo "Last Vercel redeploy trigger: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            echo "Source actor: ${{ github.actor }}"
+            echo "Source branch: ${{ github.ref_name }}"
+            echo "Source commit: ${{ github.sha }}"
+          } > deployment-triggers/vercel-redeploy.txt
+
+      - name: Commit and push the redeploy marker
+        run: |
+          git config user.name "${{ github.repository_owner }}"
+          git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
+          git add deployment-triggers/vercel-redeploy.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: trigger vercel redeploy"
+          git push
